@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Say Hello') {
+            steps {
+                echo 'Hello from Day 2 🚀'
+            }
+        }
+
+        stage('Run Command') {
+            steps {
+                sh 'echo Running a shell command in Jenkins'
+                sh 'pwd'
+            }
+        }
+    }
+}
