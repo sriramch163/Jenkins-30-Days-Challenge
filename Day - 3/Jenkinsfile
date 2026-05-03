@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Create File') {
+            steps {
+                sh 'echo "This is Day 3 Jenkins pipeline" > file.txt'
+            }
+        }
+
+        stage('Read File') {
+            steps {
+                sh 'cat file.txt'
+            }
+        }
+
+        stage('List Files') {
+            steps {
+                sh 'ls -l'
+            }
+        }
+    }
+}
