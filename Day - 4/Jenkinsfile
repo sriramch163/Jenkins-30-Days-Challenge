@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    environment {
+        MESSAGE = "Welcome to Jenkins Day 4"
+        FILE_NAME = "env.txt"
+    }
+
+    stages {
+        stage('Print Variable') {
+            steps {
+                echo "${MESSAGE}"
+            }
+        }
+
+        stage('Use Variable in Command') {
+            steps {
+                sh 'echo $MESSAGE > $FILE_NAME'
+            }
+        }
+
+        stage('Read File') {
+            steps {
+                sh 'cat $FILE_NAME'
+            }
+        }
+    }
+}
