@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'NAME', defaultValue: 'User', description: 'Enter your name')
+    }
+
+    stages {
+        stage('Greet User') {
+            steps {
+                echo "Hello, ${params.NAME}"
+            }
+        }
+
+        stage('Save Message') {
+            steps {
+                sh "echo Hello ${params.NAME} > user.txt"
+            }
+        }
+
+        stage('Display File') {
+            steps {
+                sh 'cat user.txt'
+            }
+        }
+    }
+}
