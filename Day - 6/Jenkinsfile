@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'test', 'prod'],
+            description: 'Choose deployment environment'
+        )
+    }
+
+    stages {
+        stage('Show Environment') {
+            steps {
+                echo "Selected Environment: ${params.ENVIRONMENT}"
+            }
+        }
+
+        stage('Deploy to Dev') {
+            when {
+                expression {
+                    params.ENVIRONMENT == 'dev'
+                }
+            }
+            steps {
+                echo 'Deploying application to DEV environment'
+            }
+        }
+
+        stage('Deploy to Test') {
+            when {
+                expression {
+                    params.ENVIRONMENT == 'test'
+                }
+            }
+            steps {
+                echo 'Deploying application to TEST environment'
+            }
+        }
+
+        stage('Deploy to Prod') {
+            when {
+                expression {
+                    params.ENVIRONMENT == 'prod'
+                }
+            }
+            steps {
+                echo 'Deploying application to PROD environment'
+            }
+        }
+    }
+}
