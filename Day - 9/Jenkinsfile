@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Python App') {
+            steps {
+                sh 'python3 app.py'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Python application executed successfully'
+        }
+    }
+}
