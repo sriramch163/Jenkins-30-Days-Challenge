@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Run Tests') {
+            steps {
+                sh 'python3 test_app.py'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'All tests passed successfully'
+        }
+
+        failure {
+            echo 'Tests failed'
+        }
+    }
+}
