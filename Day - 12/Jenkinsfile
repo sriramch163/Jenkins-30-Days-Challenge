@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t jenkins-python-app .'
+            }
+        }
+
+        stage('List Docker Images') {
+            steps {
+                sh 'docker images'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Docker image built successfully ✅'
+        }
+
+        failure {
+            echo 'Docker build failed ❌'
+        }
+    }
+}
