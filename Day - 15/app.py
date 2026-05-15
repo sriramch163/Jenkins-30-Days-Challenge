@@ -1,0 +1,1 @@
+print("Application pulled from GitHub successfully 🚀")
