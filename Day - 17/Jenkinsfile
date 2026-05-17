@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building application...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
+
+        stage('Approval') {
+            steps {
+                input message: 'Do you want to continue deployment?'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application 🚀'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment completed successfully ✅'
+        }
+    }
+}
