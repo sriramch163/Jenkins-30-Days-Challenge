@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo 'Building application...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'python3 test_app.py'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'python3 app.py'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'CI/CD pipeline executed successfully ✅'
+        }
+
+        failure {
+            echo 'Pipeline failed ❌'
+        }
+    }
+}
