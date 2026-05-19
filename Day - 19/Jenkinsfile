@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME = "jenkins-demo-app"
+        ENV = "development"
+    }
+
+    stages {
+
+        stage('Print Environment Details') {
+            steps {
+                echo "Application Name: ${APP_NAME}"
+                echo "Deployment Environment: ${ENV}"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building ${APP_NAME}..."
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying ${APP_NAME} to ${ENV} environment 🚀"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully ✅'
+        }
+    }
+}
