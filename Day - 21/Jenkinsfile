@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Create Artifact') {
+            steps {
+                sh 'echo "Jenkins Artifact Example" > build.txt'
+            }
+        }
+
+        stage('Display Artifact') {
+            steps {
+                sh 'cat build.txt'
+            }
+        }
+    }
+
+    post {
+
+        success {
+            archiveArtifacts artifacts: 'build.txt'
+            echo 'Artifact archived successfully ✅'
+        }
+
+        failure {
+            echo 'Pipeline failed ❌'
+        }
+    }
+}
