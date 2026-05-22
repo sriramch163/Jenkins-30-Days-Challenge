@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Create Sample File') {
+            steps {
+                sh 'echo "Jenkins Backup Example" > data.txt'
+            }
+        }
+
+        stage('Create Backup') {
+            steps {
+                sh 'tar -cvf backup.tar data.txt'
+            }
+        }
+
+        stage('List Backup Files') {
+            steps {
+                sh 'ls -l'
+            }
+        }
+    }
+
+    post {
+
+        success {
+            archiveArtifacts artifacts: 'backup.tar'
+            echo 'Backup created successfully ✅'
+        }
+
+        failure {
+            echo 'Backup process failed ❌'
+        }
+    }
+}
