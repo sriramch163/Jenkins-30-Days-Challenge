@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Retry Example') {
+            steps {
+
+                retry(3) {
+                    sh 'echo "Trying pipeline step..."'
+
+                    // Simulated failure
+                    sh 'exit 1'
+                }
+            }
+        }
+    }
+
+    post {
+
+        success {
+            echo 'Pipeline completed successfully ✅'
+        }
+
+        failure {
+            echo 'Pipeline failed after 3 retries ❌'
+        }
+    }
+}
