@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Long Running Task') {
+            steps {
+
+                timeout(time: 10, unit: 'SECONDS') {
+
+                    sh 'echo "Starting long task..."'
+
+                    // Simulated delay
+                    sh 'sleep 20'
+                }
+            }
+        }
+    }
+
+    post {
+
+        success {
+            echo 'Pipeline completed successfully ✅'
+        }
+
+        aborted {
+            echo 'Pipeline stopped due to timeout ⏰'
+        }
+
+        failure {
+            echo 'Pipeline failed ❌'
+        }
+    }
+}
