@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    environment {
+        SECRET_TEXT = credentials('my-secret-text')
+    }
+
+    stages {
+
+        stage('Use Credentials') {
+            steps {
+
+                echo 'Accessing Jenkins credentials securely...'
+
+                sh '''
+                    echo "Username: $SECRET_TEXT_USR"
+                    echo "Password is securely stored"
+                '''
+            }
+        }
+    }
+
+    post {
+
+        success {
+            echo 'Credentials accessed successfully ✅'
+        }
+
+        failure {
+            echo 'Pipeline failed ❌'
+        }
+    }
+}
