@@ -1,0 +1,21 @@
+@Library('my-shared-library') _
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Use Shared Library') {
+            steps {
+                sayHello('Sriram')
+            }
+        }
+    }
+
+    post {
+
+        success {
+            echo 'Shared Library executed successfully ✅'
+        }
+    }
+}
