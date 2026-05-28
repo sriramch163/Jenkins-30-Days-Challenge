@@ -1,0 +1,38 @@
+pipeline {
+
+    agent none
+
+    stages {
+
+        stage('Run on Master Node') {
+            agent {
+                label 'master'
+            }
+
+            steps {
+                echo 'Running on Jenkins master node 🚀'
+            }
+        }
+
+        stage('Run on Linux Agent') {
+            agent {
+                label 'linux'
+            }
+
+            steps {
+                echo 'Running on Linux agent ✅'
+            }
+        }
+    }
+
+    post {
+
+        success {
+            echo 'Pipeline executed on multiple agents successfully ✅'
+        }
+
+        failure {
+            echo 'Pipeline failed ❌'
+        }
+    }
+}
