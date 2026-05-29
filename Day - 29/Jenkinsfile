@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(
+            name: 'APP_NAME',
+            defaultValue: 'my-app',
+            description: 'Enter application name'
+        )
+
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'test', 'prod'],
+            description: 'Select deployment environment'
+        )
+    }
+
+    stages {
+
+        stage('Display Parameters') {
+            steps {
+                echo "Application: ${params.APP_NAME}"
+                echo "Environment: ${params.ENVIRONMENT}"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying ${params.APP_NAME} to ${params.ENVIRONMENT} 🚀"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Parameterized build completed successfully ✅'
+        }
+    }
+}
